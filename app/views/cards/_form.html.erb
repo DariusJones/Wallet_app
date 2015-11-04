@@ -1,33 +1,52 @@
-<%= form_for(@card) do |f| %>
-  <% if @card.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@card.errors.count, "error") %> prohibited this card from being saved:</h2>
+<%= form_for @card, :html => { :class => "form-horizontal card" } do |f| %>
 
-      <ul>
-      <% @card.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+    <% if @card.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@card.errors.count, "error") %> prohibited this card from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @card.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :number %><br>
-    <%= f.text_field :number %>
+  <div class="control-group">
+    <%= f.label :number, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :number, :class => 'form-control' %>
+    </div>
+    <%= error_span(@card[:number]) %>
   </div>
-  <div class="field">
-    <%= f.label :exp_year %><br>
-    <%= f.number_field :exp_year %>
+  <div class="control-group">
+    <%= f.label :exp_year, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :exp_year, :class => 'form-control' %>
+    </div>
+    <%= error_span(@card[:exp_year]) %>
   </div>
-  <div class="field">
-    <%= f.label :exp_month %><br>
-    <%= f.number_field :exp_month %>
+  <div class="control-group">
+    <%= f.label :exp_month, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :exp_month, :class => 'form-control' %>
+    </div>
+    <%= error_span(@card[:exp_month]) %>
   </div>
-  <div class="field">
-    <%= f.label :card_type %><br>
-    <%= f.text_field :card_type %>
+  <div class="control-group">
+    <%= f.label :card_type, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :card_type, :class => 'form-control' %>
+    </div>
+    <%= error_span(@card[:card_type]) %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+
+
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            cards_path, :class => 'btn btn-default' %>
+
 <% end %>

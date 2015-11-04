@@ -1,24 +1,25 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = Card -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
 
-<p>
-  <strong>Number:</strong>
-  <%= @card.number %>
-</p>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:number) %>:</strong></dt>
+  <dd><%= @card.number %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:exp_year) %>:</strong></dt>
+  <dd><%= @card.exp_year %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:exp_month) %>:</strong></dt>
+  <dd><%= @card.exp_month %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:card_type) %>:</strong></dt>
+  <dd><%= @card.card_type %></dd>
+</dl>
 
-<p>
-  <strong>Exp_year:</strong>
-  <%= @card.exp_year %>
-</p>
-
-<p>
-  <strong>Exp_month:</strong>
-  <%= @card.exp_month %>
-</p>
-
-<p>
-  <strong>Card_type:</strong>
-  <%= @card.card_type %>
-</p>
-
-<%= link_to 'Edit', edit_card_path(@card) %> |
-<%= link_to 'Back', cards_path %>
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              cards_path, :class => 'btn btn-default'  %>
+<%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_card_path(@card), :class => 'btn btn-default' %>
+<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              card_path(@card),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
