@@ -1,1 +1,11 @@
-index.html.erb
+<% @user_cards.each do |uc| %>
+<p>
+	<%= link_to(uc.user.fname, user_path(uc.user.id)) %> 
+	can use
+	<%= uc.card.number %>
+	whenever.
+</p>
+
+<!-- 	<p><%= uc.user.fname %> can use <%= uc.card.number %> whenever.</p>
+ -->	
+	<% end %>
