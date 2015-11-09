@@ -11,6 +11,7 @@ class CardsController < ApplicationController
   # GET /cards/1.json
   def show
     @cards = Card.find(params[:id])
+    @ownership = !UserCard.find_by(user_id: 1, card_id: @card.id ).nil?
   end
 
   # GET /cards/new
