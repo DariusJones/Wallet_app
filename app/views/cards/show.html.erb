@@ -18,16 +18,20 @@
               cards_path, :class => 'btn btn-default'  %>
 <%= link_to t('.edit', :default => t("helpers.links.edit")),
               edit_card_path(@card), :class => 'btn btn-default' %>
-<%= link_to t('.add', :default => t("helpers.links.add")),
-              user_cards_path(card_id: @card.id, user_id: 1),
-                method: :post,
-               :class => 'btn btn-info'  %>
-<%= link_to t('.remove', :default => t("helpers.links.remove")),
-              user_card_path(card_id: @card.id, user_id: 1),
-                method: :delete,
-               :class => 'btn btn-info'  %>
+
 <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
               card_path(@card),
               :method => 'delete',
               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
               :class => 'btn btn-danger' %>
+<% if @ownership.nil? %>         
+  <%= link_to t('.add', :default => t("helpers.links.add")),
+                user_cards_path(card_id: @card.id, user_id: session[:user_id]),
+                  method: :post,
+                 :class => 'btn btn-info'  %>
+<% else %>
+<%= link_to t('.remove', :default => t("helpers.links.remove")),
+              user_card_path(@ownership.id),
+                method: :delete,
+               :class => 'btn btn-info'  %>
+<% end %>

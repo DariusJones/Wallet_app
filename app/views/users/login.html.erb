@@ -1,0 +1,9 @@
+<h2>Please Login in to continue!</h2>
+
+ <%= form_tag "/users/" do %>
+<%= label_tag :email %>
+<%= text_field_tag :email %>
+<%= label_tag :password %>
+<%= password_field_tag :password %>
+<%= submit_tag "Login" %>
+<% end %>

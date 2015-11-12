@@ -62,6 +62,24 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
+  def loginverify
+    result = User.all.where("fname=? AND password=?", params[:username],params[:password]).first
+    if result
+      session[:user_id] = result.id
+      redirect_to "/profile"
+    else
+      redirect_to "login?error =BADUSERNAMEORPASSWORD"
+    end
+  end
+  def logout
+    session[:user_id] = nil
+    session.clear
+
+    redirect_to "/users"
+  end
+  def profile
+    @user = User.find_by(id: session[:user_id])
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
